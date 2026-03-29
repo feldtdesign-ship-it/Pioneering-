@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pioneering Politics — Take Back Fairbanks</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold:        #c9933a;
+    --gold-deep:   #a8751e;
+    --gold-light:  #dba94e;
+    --black:       #0d0d0d;
+    --black-soft:  #1a1a1a;
+    --white:       #ffffff;
+    --border-b:    rgba(0,0,0,0.15);
+    --border-w:    rgba(255,255,255,0.12);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--gold);
+    color: var(--black);
+    font-family: 'Barlow', sans-serif;
+    font-size: 18px;
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1rem 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(201,147,58,0.97);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--border-b);
+  }
+  .nav-logo {
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 800;
+    font-size: 1.05rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--black);
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+    font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--black); text-decoration: none; opacity: 0.5; transition: opacity 0.2s;
+  }
+  .nav-links a:hover { opacity: 1; }
+
+  /* HERO */
+  .hero-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+    font-size: 0.78rem; letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--black); opacity: 0.55; margin-bottom: 1.5rem;
+  }
+
+
+  .hero {
+    min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+    padding: 8rem 2rem 5rem; max-width: 1100px; margin: 0 auto;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif; font-weight: 900;
+    font-size: clamp(3.5rem, 9vw, 8.5rem); line-height: 0.93;
+    color: var(--black); margin-bottom: 0.2em;
+  }
+  .hero h1 em { font-style: italic; color: var(--white); }
+  .hero-sub {
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 800;
+    font-size: clamp(1.5rem, 3.5vw, 2.8rem); letter-spacing: 0.07em; text-transform: uppercase;
+    color: var(--black); opacity: 0.4; margin-bottom: 2.5rem;
+    border-left: 4px solid var(--white); padding-left: 1rem;
+  }
+  .hero-body {
+    max-width: 580px; font-size: 1.1rem; color: var(--black); opacity: 0.7;
+    margin-bottom: 3rem; line-height: 1.75;
+  }
+  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+
+  .btn-black {
+    background: var(--black); color: var(--gold);
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 800;
+    font-size: 0.95rem; letter-spacing: 0.14em; text-transform: uppercase;
+    padding: 1rem 2.5rem; border: none; cursor: pointer; text-decoration: none;
+    transition: background 0.2s, transform 0.15s; display: inline-block;
+  }
+  .btn-black:hover { background: #222; transform: translateY(-1px); }
+
+  .btn-outline {
+    background: transparent; color: var(--black);
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+    font-size: 0.95rem; letter-spacing: 0.14em; text-transform: uppercase;
+    padding: 1rem 2.5rem; border: 2px solid var(--black); cursor: pointer;
+    text-decoration: none; opacity: 0.6;
+    transition: opacity 0.2s, background 0.2s, color 0.2s; display: inline-block;
+  }
+  .btn-outline:hover { opacity: 1; background: var(--black); color: var(--gold); }
+
+  .btn-gold {
+    background: var(--gold); color: var(--black);
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 800;
+    font-size: 0.95rem; letter-spacing: 0.14em; text-transform: uppercase;
+    padding: 1rem 2.5rem; border: none; cursor: pointer; text-decoration: none;
+    transition: background 0.2s; display: inline-block;
+  }
+  .btn-gold:hover { background: var(--gold-light); }
+
+  /* ICON STATS ROW */
+  .icon-stats {
+    background: var(--gold); border-top: 1px solid var(--border-b); border-bottom: 1px solid var(--border-b);
+    padding: 4rem 2rem;
+  }
+  .icon-stats-grid {
+    max-width: 1000px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap: 2.5rem;
+    text-align: center;
+  }
+  .icon-stat { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+  .icon-circle {
+    width: 78px; height: 78px; border-radius: 50%; background: var(--black);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .icon-circle svg { width: 34px; height: 34px; fill: none; stroke: var(--white); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+  .icon-num { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 2.8rem; line-height: 1; color: var(--black); }
+  .icon-label { font-size: 0.85rem; color: var(--black); opacity: 0.55; line-height: 1.4; max-width: 150px; }
+
+  /* BIG STAT */
+  .big-stat { background: var(--black); padding: 5rem 2rem; text-align: center; }
+  .big-num {
+    font-family: 'Playfair Display', serif; font-weight: 900;
+    font-size: clamp(9rem, 25vw, 18rem); line-height: 0.82;
+    color: var(--gold); display: block; margin-bottom: 0.15em;
+  }
+  .big-label {
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+    font-size: clamp(0.9rem, 2.2vw, 1.5rem); letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--white); opacity: 0.45;
+  }
+  .big-context {
+    max-width: 520px; margin: 2rem auto 0; font-size: 1rem;
+    color: var(--white); opacity: 0.4; line-height: 1.75;
+  }
+
+  /* SECTIONS */
+  .gold-bg { background: var(--gold); }
+  .black-bg { background: var(--black); color: var(--white); }
+
+  .section-inner { max-width: 1100px; margin: 0 auto; padding: 6rem 2rem; }
+
+  .section-label {
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+    font-size: 0.7rem; letter-spacing: 0.35em; text-transform: uppercase;
+    margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem;
+  }
+  .gold-bg .section-label { color: var(--black); opacity: 0.4; }
+  .gold-bg .section-label::after { content:''; flex:1; height:1px; background:var(--black); opacity:0.12; }
+  .black-bg .section-label { color: var(--gold); opacity: 1; }
+  .black-bg .section-label::after { content:''; flex:1; height:1px; background:var(--gold); opacity:0.2; }
+
+  .section-title {
+    font-family: 'Playfair Display', serif; font-weight: 900;
+    font-size: clamp(2.2rem, 5vw, 4rem); line-height: 1.05; margin-bottom: 1.5rem;
+  }
+  .gold-bg .section-title { color: var(--black); }
+  .black-bg .section-title { color: var(--white); }
+
+  .section-body { font-size: 1.05rem; max-width: 660px; line-height: 1.75; }
+  .gold-bg .section-body { color: var(--black); opacity: 0.65; }
+  .black-bg .section-body { color: var(--white); opacity: 0.5; }
+
+  /* PULL QUOTE */
+  .pull-quote {
+    border-left: 5px solid var(--gold); padding: 3rem 3rem;
+    margin: 4rem 0; background: var(--black);
+  }
+  .pull-quote p {
+    font-family: 'Playfair Display', serif; font-weight: 700; font-style: italic;
+    font-size: clamp(1.3rem, 2.8vw, 2rem); line-height: 1.4; color: var(--white);
+  }
+  .pull-quote cite a {
+    display: inline-block; margin-top: 1.25rem;
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+    font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--gold); opacity: 0.6; font-style: normal; text-decoration: none;
+    transition: opacity 0.2s;
+  }
+  .pull-quote cite a:hover { opacity: 1; }
+
+  /* THREE COL */
+  .three-col {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(270px,1fr));
+    margin-top: 4rem; border: 2px solid var(--black);
+  }
+  .col-card { padding: 2.5rem; border-right: 1px solid rgba(0,0,0,0.12); transition: background 0.2s; }
+  .col-card:last-child { border-right: none; }
+  .col-card:hover { background: rgba(0,0,0,0.05); }
+  .col-num { font-family:'Playfair Display',serif; font-weight:900; font-size:3rem; color:var(--black); opacity:0.1; line-height:1; margin-bottom:1rem; }
+  .col-title { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1.2rem; letter-spacing:0.05em; text-transform:uppercase; color:var(--black); margin-bottom:0.65rem; }
+  .col-text { font-size:0.92rem; color:var(--black); opacity:0.58; line-height:1.65; }
+
+  /* TABLE */
+  .cycle-table { margin-top:3rem; width:100%; border-collapse:collapse; border:1px solid rgba(255,255,255,0.08); }
+  .cycle-table thead tr { background:rgba(201,147,58,0.12); }
+  .cycle-table th { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:0.75rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold); padding:1rem 1.25rem; text-align:left; border-bottom:1px solid rgba(255,255,255,0.08); }
+  .cycle-table td { padding:0.9rem 1.25rem; font-size:0.92rem; color:rgba(255,255,255,0.6); border-bottom:1px solid rgba(255,255,255,0.04); }
+  .cycle-table tr:last-child td { border-bottom:none; }
+  .cycle-table tr:hover td { background:rgba(201,147,58,0.06); color:var(--white); }
+  .badge { display:inline-block; font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:0.65rem; letter-spacing:0.1em; text-transform:uppercase; padding:0.22em 0.65em; }
+  .badge-now { background:var(--gold); color:var(--black); }
+  .badge-next { background:rgba(201,147,58,0.18); color:var(--gold); }
+  .badge-later { background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.3); }
+
+  /* TIMELINE */
+  .timeline { margin-top:3rem; }
+  .tl-item { display:grid; grid-template-columns:100px 1px 1fr; gap:0 1.75rem; padding-bottom:2.5rem; }
+  .tl-date { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:0.75rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold); text-align:right; padding-top:0.2rem; }
+  .tl-line { position:relative; background:rgba(255,255,255,0.1); }
+  .tl-line::before { content:''; position:absolute; top:0.3rem; left:50%; transform:translateX(-50%); width:8px; height:8px; background:var(--gold); border-radius:50%; }
+  .tl-title { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1rem; letter-spacing:0.05em; text-transform:uppercase; color:var(--white); margin-bottom:0.3rem; }
+  .tl-text { font-size:0.9rem; color:rgba(255,255,255,0.4); line-height:1.6; }
+
+  /* TWO COL GRID */
+  .two-col { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:start; }
+
+  /* FORM ELEMENTS — gold bg */
+  .gold-bg .field-label { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:0.72rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--black); opacity:0.5; display:block; margin-bottom:0.4rem; }
+  .gold-bg select, .gold-bg input[type=text], .gold-bg input[type=email], .gold-bg textarea {
+    background:rgba(0,0,0,0.08); border:1px solid rgba(0,0,0,0.18); color:var(--black);
+    font-family:'Barlow',sans-serif; font-size:1rem; padding:0.75rem 1rem; width:100%;
+    outline:none; appearance:none; transition:border-color 0.2s; resize:vertical;
+  }
+  .gold-bg select:focus, .gold-bg input:focus, .gold-bg textarea:focus { border-color:var(--black); }
+  .gold-bg select option { background:#c9933a; }
+
+  /* FORM ELEMENTS — black bg */
+  .black-bg .field-label { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:0.72rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold); display:block; margin-bottom:0.4rem; }
+  .black-bg select, .black-bg input[type=text], .black-bg input[type=email], .black-bg textarea {
+    background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); color:var(--white);
+    font-family:'Barlow',sans-serif; font-size:1rem; padding:0.75rem 1rem; width:100%;
+    outline:none; appearance:none; transition:border-color 0.2s; resize:vertical;
+  }
+  .black-bg select:focus, .black-bg input:focus, .black-bg textarea:focus { border-color:var(--gold); }
+  .black-bg select option { background:#1a1a1a; }
+
+  .field-group { display:flex; flex-direction:column; gap:0.35rem; margin-bottom:1.2rem; }
+
+  /* CHECKBOX */
+  .checkbox-group { display:flex; flex-direction:column; gap:0.6rem; }
+  .checkbox-item { display:flex; align-items:center; gap:0.7rem; cursor:pointer; font-size:0.92rem; }
+  .gold-bg .checkbox-item { color:rgba(0,0,0,0.6); }
+  .black-bg .checkbox-item { color:rgba(255,255,255,0.55); }
+  .checkbox-item input[type=checkbox] { width:17px; height:17px; flex-shrink:0; }
+  .gold-bg .checkbox-item input[type=checkbox] { accent-color:var(--black); }
+  .black-bg .checkbox-item input[type=checkbox] { accent-color:var(--gold); }
+
+  /* RESULT BOX */
+  .result-box { margin-top:1.5rem; padding:1.5rem; border-left:4px solid var(--black); background:rgba(0,0,0,0.08); display:none; }
+  .result-box.visible { display:block; }
+  .result-title { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1rem; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:0.5rem; color:var(--black); }
+  .result-title.dim { opacity:0.4; }
+  .result-text { font-size:0.92rem; color:var(--black); opacity:0.62; line-height:1.6; }
+
+  /* FILING STEPS */
+  .step-row { display:flex; gap:1.25rem; align-items:flex-start; margin-bottom:1.5rem; }
+  .step-badge { width:34px; height:34px; background:var(--black); color:var(--gold); font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:0.82rem; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .step-title { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:0.98rem; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:0.18rem; color:var(--black); }
+  .step-desc { font-size:0.88rem; opacity:0.52; line-height:1.55; }
+
+  /* QUALITY */
+  .quality-item { margin-bottom:2rem; }
+  .quality-label { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:0.98rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--gold); margin-bottom:0.35rem; }
+  .quality-text { font-size:0.9rem; color:rgba(255,255,255,0.45); line-height:1.65; }
+
+  /* SURVEY THANKS */
+  .survey-thanks { display:none; padding:2.5rem; border:2px solid var(--gold); text-align:center; }
+  .survey-thanks.visible { display:block; }
+  .survey-thanks-title { font-family:'Playfair Display',serif; font-weight:900; font-size:2rem; color:var(--gold); margin-bottom:0.5rem; }
+  .survey-thanks-body { font-size:0.95rem; color:rgba(255,255,255,0.5); }
+
+  /* FOOTER */
+  footer { background:var(--black); border-top:2px solid var(--gold); padding:3rem 2rem; text-align:center; }
+  .footer-logo { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1.25rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--gold); margin-bottom:0.4rem; }
+  .footer-tag { font-size:0.82rem; color:rgba(255,255,255,0.25); margin-bottom:1.25rem; }
+  .footer-legal { font-size:0.72rem; color:rgba(255,255,255,0.18); max-width:580px; margin:0 auto; line-height:1.65; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .two-col { grid-template-columns:1fr; gap:3rem; }
+    .three-col { grid-template-columns:1fr; }
+    .col-card { border-right:none; border-bottom:1px solid rgba(0,0,0,0.1); }
+    .icon-stats-grid { grid-template-columns:repeat(2,1fr); gap:1.5rem; }
+    nav { padding:1rem; }
+    .nav-links { display:none; }
+  }
+
+  /* FADE */
+  .fade-up { opacity:0; transform:translateY(22px); transition:opacity 0.6s ease, transform 0.6s ease; }
+  .fade-up.in { opacity:1; transform:none; }
+</style>
+</head>
+<body id="top">
+
+<!-- NAV -->
+<nav>
+  <a href="#top" class="nav-logo" style="text-decoration:none;">Pioneering Politics</a>
+  <ul class="nav-links">
+    <li><a href="#why">Why Now</a></li>
+    <li><a href="#seats">The Seats</a></li>
+    <li><a href="#eligibility">Am I Eligible?</a></li>
+    <li><a href="#survey">Get Involved</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="gold-bg">
+  <div class="hero">
+    <p class="hero-eyebrow fade-up">Fairbanks North Star Borough &nbsp;·&nbsp; 2026</p>
+    <h1 class="fade-up">Take Back<br><em>Fairbanks.</em></h1>
+    <p class="hero-sub fade-up">Pioneering Politics</p>
+    <p class="hero-body fade-up">This town was raised by people who had no business being here and made something permanent anyway. That spirit didn't disappear. It just hasn't had anything worthy of it. Until now.</p>
+    <div class="hero-cta fade-up">
+      <a href="#eligibility" class="btn-black">Am I Eligible to Run?</a>
+      <a href="#survey" class="btn-outline">I Want to Help</a>
+    </div>
+  </div>
+</section>
+
+<!-- ICON STATS -->
+<div class="icon-stats">
+  <div class="icon-stats-grid">
+    <div class="icon-stat fade-up">
+      <div class="icon-circle">
+        <svg viewBox="0 0 24 24"><circle cx="9" cy="7" r="3"/><path d="M3 21v-2a4 4 0 0 1 4-4h4"/><circle cx="17" cy="10" r="3"/><path d="M14 21v-2a4 4 0 0 1 4-4h2"/></svg>
+      </div>
+      <div class="icon-num">9</div>
+      <div class="icon-label">Assembly seats, all elected borough-wide</div>
+    </div>
+    <div class="icon-stat fade-up">
+      <div class="icon-circle">
+        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      </div>
+      <div class="icon-num">3</div>
+      <div class="icon-label">Seats on the October 2026 ballot</div>
+    </div>
+    <div class="icon-stat fade-up">
+      <div class="icon-circle">
+        <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      </div>
+      <div class="icon-num">43</div>
+      <div class="icon-label">Vote margin on election night for Mayor</div>
+    </div>
+    <div class="icon-stat fade-up">
+      <div class="icon-circle">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <div class="icon-num">107</div>
+      <div class="icon-label">Days until candidate filing opens</div>
+    </div>
+  </div>
+</div>
+
+<!-- BIG 154 -->
+<div class="big-stat">
+  <span class="big-num">154</span>
+  <span class="big-label">Votes separated the last two candidates for Mayor</span>
+  <p class="big-context">On election night it was 43. After absentee ballots were counted a week later it settled at 154. Across a borough of nearly 95,000 people. Your block. Your street. Your neighbors. This is not a spectator sport.</p>
+</div>
+
+<!-- WHY NOW -->
+<section id="why" class="gold-bg">
+  <div class="section-inner">
+    <p class="section-label fade-up">The Case</p>
+    <h2 class="section-title fade-up">Fairbanks is not broken.<br>Its leadership is.</h2>
+    <p class="section-body fade-up">The people here are builders, problem-solvers, survivors. Nearly 95,000 of them live in a place that demands more resilience before breakfast than most cities ask of people in a year. The infrastructure is aging. The economy stalls. Nothing ambitious has been attempted in decades. This isn't an Alaska problem. It's a leadership vacuum. Vacuums get filled. The question is by whom.</p>
+
+    <div class="pull-quote fade-up">
+      <p>"Fairbanks was founded by people who had no reason to believe it would work. That's exactly why it did."</p>
+      <cite><a href="#top">&#8593;&nbsp; Pioneering Politics — back to top</a></cite>
+    </div>
+
+    <div class="three-col fade-up">
+      <div class="col-card">
+        <div class="col-num">01</div>
+        <div class="col-title">Progress Over Party</div>
+        <p class="col-text">No party affiliations. No ideological litmus tests. The only test: does this make Fairbanks more functional, more proud, more worth living in?</p>
+      </div>
+      <div class="col-card">
+        <div class="col-num">02</div>
+        <div class="col-title">Builders Not Politicians</div>
+        <p class="col-text">We are not recruiting career politicians. We want people who solve hard problems under constraint and don't need consensus before they act.</p>
+      </div>
+      <div class="col-card">
+        <div class="col-num">03</div>
+        <div class="col-title">The Long Game</div>
+        <p class="col-text">Three election cycles. Nine Assembly seats. The Mayor's office. Change this real takes five years minimum. We are starting now so it lands on time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE SEATS -->
+<section id="seats" class="black-bg">
+  <div class="section-inner">
+    <p class="section-label fade-up">The Map</p>
+    <h2 class="section-title fade-up">Every seat.<br>Every cycle.</h2>
+    <p class="section-body fade-up">The FNSB Assembly has nine seats, each serving three years, staggered across three cycles. The next election is October 6, 2026. Candidate filing opens July 15.</p>
+
+    <table class="cycle-table fade-up">
+      <thead>
+        <tr>
+          <th>Cycle</th><th>Seat</th><th>Current Holder</th><th>Filing Opens</th><th>Election</th><th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>2026</td><td><strong style="color:var(--white)">D</strong></td><td>Liz Reeves</td><td>July 15, 2026</td><td>Oct 6, 2026</td><td><span class="badge badge-now">Now</span></td></tr>
+        <tr><td>2026</td><td><strong style="color:var(--white)">E</strong></td><td>Nick LaJiness</td><td>July 15, 2026</td><td>Oct 6, 2026</td><td><span class="badge badge-now">Now</span></td></tr>
+        <tr><td>2026</td><td><strong style="color:var(--white)">H</strong></td><td>Scott Crass</td><td>July 15, 2026</td><td>Oct 6, 2026</td><td><span class="badge badge-now">Now</span></td></tr>
+        <tr><td>2027</td><td><strong style="color:var(--white)">Mayor</strong></td><td>Grier Hopkins</td><td>~July 2027</td><td>Oct 2027</td><td><span class="badge badge-next">Next</span></td></tr>
+        <tr><td>2027</td><td><strong style="color:var(--white)">A</strong></td><td>David Guttenberg</td><td>~July 2027</td><td>Oct 2027</td><td><span class="badge badge-next">Next</span></td></tr>
+        <tr><td>2027</td><td><strong style="color:var(--white)">F</strong></td><td>Tammie Wilson</td><td>~July 2027</td><td>Oct 2027</td><td><span class="badge badge-next">Next</span></td></tr>
+        <tr><td>2027</td><td><strong style="color:var(--white)">G</strong></td><td>Kristan Kelly</td><td>~July 2027</td><td>Oct 2027</td><td><span class="badge badge-next">Next</span></td></tr>
+        <tr><td>2028</td><td><strong style="color:var(--white)">B</strong></td><td>Brett Rotermund</td><td>~July 2028</td><td>Oct 2028</td><td><span class="badge badge-later">2028</span></td></tr>
+        <tr><td>2028</td><td><strong style="color:var(--white)">C</strong></td><td>Garrett Armstrong</td><td>~July 2028</td><td>Oct 2028</td><td><span class="badge badge-later">2028</span></td></tr>
+        <tr><td>2028</td><td><strong style="color:var(--white)">I</strong></td><td>Patrick Roach</td><td>~July 2028</td><td>Oct 2028</td><td><span class="badge badge-later">2028</span></td></tr>
+      </tbody>
+    </table>
+
+    <div style="margin-top:4rem;">
+      <p class="section-label fade-up">2026 Key Dates</p>
+      <div class="timeline fade-up">
+        <div class="tl-item"><div class="tl-date">Jul 15</div><div class="tl-line"></div><div><div class="tl-title">Filing Opens</div><p class="tl-text">8:00 a.m., Borough Clerk's office. Declaration of Candidacy, Financial Disclosure, APOC paperwork, $25 fee.</p></div></div>
+        <div class="tl-item"><div class="tl-date">Jul 29</div><div class="tl-line"></div><div><div class="tl-title">Filing Closes</div><p class="tl-text">5:00 p.m. hard deadline. No exceptions.</p></div></div>
+        <div class="tl-item"><div class="tl-date">Aug 5</div><div class="tl-line"></div><div><div class="tl-title">Withdrawal Deadline</div><p class="tl-text">Last day to remove yourself from the ballot. 5:00 p.m.</p></div></div>
+        <div class="tl-item"><div class="tl-date">Sep 6</div><div class="tl-line"></div><div><div class="tl-title">Voter Registration Deadline</div><p class="tl-text">Last day to register or update your Alaska voter registration for this election.</p></div></div>
+        <div class="tl-item" style="padding-bottom:0;"><div class="tl-date" style="color:var(--gold);">Oct 6</div><div class="tl-line" style="background:var(--gold);"></div><div><div class="tl-title" style="color:var(--gold);">Election Day</div><p class="tl-text">Certification October 22. New terms begin October 26.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ELIGIBILITY -->
+<section id="eligibility" class="gold-bg">
+  <div class="section-inner">
+    <div class="two-col">
+      <div>
+        <p class="section-label fade-up">Eligibility Checker</p>
+        <h2 class="fade-up" style="font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(1.8rem,4vw,3rem);line-height:1.1;margin-bottom:1rem;color:var(--black);">Could you run?</h2>
+        <p class="fade-up" style="font-size:1rem;opacity:0.65;margin-bottom:2rem;line-height:1.7;">Three requirements under Alaska law and FNSB code. Answer below to find out where you stand.</p>
+
+        <div class="field-group fade-up">
+          <label class="field-label" for="ak-voter">Are you a qualified Alaska voter?</label>
+          <select id="ak-voter"><option value="">Select...</option><option value="yes">Yes</option><option value="no">No</option></select>
+        </div>
+        <div class="field-group fade-up">
+          <label class="field-label" for="residency">How long have you lived in FNSB?</label>
+          <select id="residency"><option value="">Select...</option><option value="over1">More than one year</option><option value="under1">Less than one year</option></select>
+        </div>
+        <div class="field-group fade-up">
+          <label class="field-label" for="other-race">Are you currently running for any other elected seat?</label>
+          <select id="other-race"><option value="">Select...</option><option value="no">No</option><option value="yes">Yes, another seat</option></select>
+        </div>
+
+        <div id="eligibility-result" class="result-box"></div>
+
+        <div class="fade-up" style="margin-top:1.5rem;">
+          <button class="btn-black" onclick="checkEligibility()">Check My Eligibility</button>
+        </div>
+      </div>
+
+      <div>
+        <p class="section-label fade-up">What It Takes</p>
+        <h2 class="fade-up" style="font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(1.8rem,4vw,3rem);line-height:1.1;margin-bottom:1rem;color:var(--black);">Filing requirements</h2>
+        <p class="fade-up" style="font-size:1rem;opacity:0.65;margin-bottom:2rem;line-height:1.7;">Bring the following to the Borough Clerk's office between July 15 and July 29, 2026.</p>
+        <div class="fade-up">
+          <div class="step-row"><div class="step-badge">01</div><div><div class="step-title">Declaration of Candidacy</div><div class="step-desc">Available from the Borough Clerk's office or fnsb.gov.</div></div></div>
+          <div class="step-row"><div class="step-badge">02</div><div><div class="step-title">Financial Disclosure</div><div class="step-desc">Public Official Financial Disclosure, required by the Alaska Public Offices Commission (APOC).</div></div></div>
+          <div class="step-row"><div class="step-badge">03</div><div><div class="step-title">APOC Campaign Paperwork</div><div class="step-desc">Campaign finance registration and related APOC filings required at or before filing.</div></div></div>
+          <div class="step-row"><div class="step-badge" style="font-size:0.72rem;">$25</div><div><div class="step-title">Filing Fee</div><div class="step-desc">Twenty-five dollars. That's the cost of entry.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SURVEY -->
+<section id="survey" class="black-bg">
+  <div class="section-inner">
+    <div class="two-col">
+      <div>
+        <p class="section-label fade-up">Get Involved</p>
+        <h2 class="fade-up" style="font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(1.8rem,4vw,3rem);line-height:1.1;margin-bottom:1rem;color:var(--white);">The next Pioneer<br>might be you.</h2>
+        <p class="fade-up" style="font-size:1rem;color:var(--white);opacity:0.55;margin-bottom:1rem;line-height:1.7;">We are building a bench. Not recruiting politicians. We want builders, problem-solvers, and people who are tired of waiting for someone else to fix things.</p>
+        <p class="fade-up" style="font-size:0.9rem;color:var(--white);opacity:0.35;margin-bottom:2rem;line-height:1.7;">All information is kept confidential and used only to follow up on civic opportunities in the Fairbanks North Star Borough.</p>
+
+        <div id="survey-form">
+          <div class="field-group fade-up"><label class="field-label" for="s-name">Full Name</label><input type="text" id="s-name" placeholder="Your name"></div>
+          <div class="field-group fade-up"><label class="field-label" for="s-email">Email</label><input type="email" id="s-email" placeholder="your@email.com"></div>
+          <div class="field-group fade-up"><label class="field-label" for="s-hood">Neighborhood or Community</label><input type="text" id="s-hood" placeholder="College, Ester, North Pole, Downtown..."></div>
+          <div class="field-group fade-up">
+            <label class="field-label" for="s-role">How would you like to be involved?</label>
+            <select id="s-role">
+              <option value="">Select one...</option>
+              <option value="candidate">I want to run for office</option>
+              <option value="volunteer">I want to volunteer on a campaign</option>
+              <option value="donor">I want to support financially</option>
+              <option value="advocate">I want to show up and advocate</option>
+              <option value="unsure">I'm not sure yet, tell me more</option>
+            </select>
+          </div>
+          <div class="field-group fade-up">
+            <label class="field-label">What issues matter most to you?</label>
+            <div class="checkbox-group">
+              <label class="checkbox-item"><input type="checkbox" value="economy"> Economic development and jobs</label>
+              <label class="checkbox-item"><input type="checkbox" value="infrastructure"> Infrastructure and public works</label>
+              <label class="checkbox-item"><input type="checkbox" value="housing"> Housing and cost of living</label>
+              <label class="checkbox-item"><input type="checkbox" value="budget"> Borough budget and fiscal transparency</label>
+              <label class="checkbox-item"><input type="checkbox" value="safety"> Public safety</label>
+              <label class="checkbox-item"><input type="checkbox" value="arts"> Arts, culture, and civic pride</label>
+              <label class="checkbox-item"><input type="checkbox" value="development"> Responsible new development</label>
+            </div>
+          </div>
+          <div class="field-group fade-up">
+            <label class="field-label" for="s-why">In one or two sentences: why Fairbanks, why now?</label>
+            <textarea id="s-why" rows="4" placeholder="Optional but we actually read these."></textarea>
+          </div>
+          <div class="fade-up" style="margin-top:0.5rem;">
+            <button class="btn-gold" onclick="submitSurvey()">Submit — I'm In</button>
+          </div>
+        </div>
+
+        <div id="survey-thanks" class="survey-thanks">
+          <div class="survey-thanks-title">You're in.</div>
+          <p class="survey-thanks-body">We'll be in touch. Fairbanks is lucky to have people like you who still give a damn. That's not nothing. That's actually the whole thing.</p>
+        </div>
+      </div>
+
+      <div style="padding-top:3rem;">
+        <p class="section-label fade-up">The Standard</p>
+        <h3 class="fade-up" style="font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(1.4rem,3vw,2rem);margin-bottom:2rem;line-height:1.1;color:var(--white);">What we're<br>looking for.</h3>
+        <div class="quality-item fade-up"><div class="quality-label">Judgment</div><p class="quality-text">The ability to weigh competing priorities and make defensible decisions under pressure. Not ideology. Not dogma. Judgment.</p></div>
+        <div class="quality-item fade-up"><div class="quality-label">Ethics</div><p class="quality-text">No active conflicts. Transparent financial history. Accountable to constituents, not donors. Full stop.</p></div>
+        <div class="quality-item fade-up"><div class="quality-label">Execution</div><p class="quality-text">A track record of finishing things. Projects, commitments, hard conversations. Governance is project management with higher stakes.</p></div>
+        <div class="quality-item fade-up"><div class="quality-label">Temperament</div><p class="quality-text">Steady under attack. Willing to be wrong. Capable of working with people who disagree. The frontier was not built by people who needed everyone to like them.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Pioneering Politics</div>
+  <p class="footer-tag">Fairbanks North Star Borough &nbsp;·&nbsp; Alaska &nbsp;·&nbsp; 2026–2028</p>
+  <p class="footer-legal">This is a nonpartisan civic initiative. It is not affiliated with any political party, and does not endorse or oppose any current officeholder by name. All candidate filing information should be verified with the Fairbanks North Star Borough Clerk's office. fnsb.gov</p>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+
+  document.querySelectorAll('.fade-up').forEach((el, i) => {
+    el.style.transitionDelay = (i % 4) * 0.07 + 's';
+    obs.observe(el);
+  });
+
+  function checkEligibility() {
+    const voter = document.getElementById('ak-voter').value;
+    const res   = document.getElementById('residency').value;
+    const other = document.getElementById('other-race').value;
+    const box   = document.getElementById('eligibility-result');
+
+    if (!voter || !res || !other) {
+      box.className = 'result-box visible';
+      box.innerHTML = '<div class="result-title dim">Please answer all three questions.</div>';
+      return;
+    }
+    if (voter === 'yes' && res === 'over1' && other === 'no') {
+      box.className = 'result-box visible'; box.style.borderColor = 'var(--black)';
+      box.innerHTML = '<div class="result-title">You appear to meet the basic requirements.</div><p class="result-text">You satisfy all three threshold requirements: qualified Alaska voter, one year of Borough residency, and not simultaneously running for another seat. Confirm with the Borough Clerk at fnsb.gov before filing. Then scroll down and tell us about yourself.</p>';
+    } else if (voter === 'no') {
+      box.className = 'result-box visible'; box.style.borderColor = 'rgba(0,0,0,0.25)';
+      box.innerHTML = '<div class="result-title dim">Voter registration comes first.</div><p class="result-text">You must be a qualified Alaska voter to run for Assembly. Register at elections.alaska.gov. The voter registration deadline for the October 2026 election is September 6, 2026.</p>';
+    } else if (res === 'under1') {
+      box.className = 'result-box visible'; box.style.borderColor = 'rgba(0,0,0,0.25)';
+      box.innerHTML = '<div class="result-title dim">Almost — residency requirement not yet met.</div><p class="result-text">FNSB requires one year of Borough residency prior to filing. If you reach that milestone before July 15, 2026, you may be eligible for this cycle. The 2027 cycle has four seats plus the Mayor\'s office.</p>';
+    } else if (other === 'yes') {
+      box.className = 'result-box visible'; box.style.borderColor = 'rgba(0,0,0,0.25)';
+      box.innerHTML = '<div class="result-title dim">You cannot run for two seats simultaneously.</div><p class="result-text">Alaska law prohibits filing for more than one elective seat at a time. If the other race concludes before the 2026 filing window, you may still be eligible. Confirm with the Borough Clerk.</p>';
+    }
+  }
+
+  function submitSurvey() {
+    const name  = document.getElementById('s-name').value.trim();
+    const email = document.getElementById('s-email').value.trim();
+    if (!name || !email) { alert('Please enter your name and email to continue.'); return; }
+    document.getElementById('survey-form').style.display = 'none';
+    document.getElementById('survey-thanks').classList.add('visible');
+    window.scrollTo({ top: document.getElementById('survey-thanks').offsetTop - 100, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
